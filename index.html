@@ -198,6 +198,30 @@
                 opacity: 0;
             }
         }
+
+        /* Instagram Button */
+        .instagram-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            padding: 0;
+            margin-left: 12px;
+        }
+
+        .instagram-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .instagram-btn svg {
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body class="bg-black text-white overflow-x-hidden">
@@ -215,6 +239,13 @@
                     <span class="text-black font-black text-xl">A</span>
                 </div>
                 <h1 class="text-2xl font-black tracking-tighter">APX SITES</h1>
+                <button onclick="openInstagram()" class="instagram-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <circle cx="17.5" cy="6.5" r="1.5" fill="white"></circle>
+                    </svg>
+                </button>
             </div>
             <div class="text-sm text-gray-400">Sites de Captação de Cliente</div>
         </div>
@@ -510,7 +541,7 @@
             <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://youtu.be/ePYsqkgaaV4"
                 title="APX SITES Demo"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -522,12 +553,17 @@
 
     <script>
         // ALTERE AQUI: Seu número do WhatsApp
-        const WHATSAPP_NUMBER = '5585999999999'; // Altere para seu número (55 + DDD + número)
+        const WHATSAPP_NUMBER = '5521964915864'; // Altere para seu número (55 + DDD + número)
+        const INSTAGRAM_URL = 'https://instagram.com/apxsites'; // Seu Instagram
 
         function openWhatsApp(message) {
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
+        }
+
+        function openInstagram() {
+            window.open(INSTAGRAM_URL, '_blank');
         }
 
         function openVideoModal() {
