@@ -304,7 +304,7 @@
 
                     <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white border-opacity-10">
                         <div class="space-y-1">
-                            <p class="text-2xl font-black">50+</p>
+                            <p class="text-2xl font-black">500+</p>
                             <p class="text-xs text-gray-500">Sites Criados</p>
                         </div>
                         <div class="space-y-1">
@@ -353,7 +353,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center space-y-4 mb-20">
                 <h3 class="text-4xl sm:text-5xl font-black tracking-tighter">Planos que Crescem com Você</h3>
-                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Escolha o nível de profissionalismo para seu negócio. Preços justos, sem surpresas.</p>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Escolha o plano perfeito para seu negócio. Preços justos, sem surpresas.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
@@ -485,7 +485,7 @@
                                 <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="text-sm text-gray-300">Manutenção grátis no primeiro mês.</span>
+                                <span class="text-sm text-gray-300">Dashboard administrativo</span>
                             </div>
                         </div>
                     </div>
@@ -497,7 +497,7 @@
     <!-- Benefits Section -->
     <section class="relative z-10 py-32 px-4 sm:px-6 lg:px-8 border-t border-white border-opacity-10">
         <div class="max-w-7xl mx-auto">
-            <h3 class="text-4xl sm:text-5xl font-black tracking-tighter mb-16 text-center">POR QUE APX SITES?</h3>
+            <h3 class="text-4xl sm:text-5xl font-black tracking-tighter mb-16 text-center">Por Que APX SITES?</h3>
             
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="space-y-3 p-6 rounded-lg border border-white border-opacity-10 hover:border-opacity-30 transition-all duration-300 group">
@@ -535,7 +535,7 @@
                 Pronto para Transformar Seu Negócio?
             </h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                Junte-se aos 50+ empresários que já cresceram com APX SITES
+                Junte-se aos 500+ empresários que já cresceram com APX SITES
             </p>
             <button onclick="openWhatsApp('Olá! Gostaria de agendar uma consulta grátis sobre os Sites de Captação de Cliente.')" class="inline-block px-12 py-5 bg-white text-black font-black text-lg rounded-lg hover:scale-105 active:scale-95 transition-all duration-300">
                 Agendar Consulta Grátis →
@@ -590,6 +590,13 @@
 
         function openVideoModal() {
             document.getElementById('videoModal').classList.add('active');
+            // Remove o spinner após 1 segundo (tempo de carregamento)
+            setTimeout(() => {
+                const spinner = document.querySelector('.video-spinner');
+                if (spinner) {
+                    spinner.style.display = 'none';
+                }
+            }, 1000);
         }
 
         function closeVideoModal() {
