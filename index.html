@@ -102,18 +102,13 @@
 
       .brand{display:flex;align-items:center;gap:.7rem;cursor:pointer}
       .brand-mark{
-        width:38px;height:38px;border-radius:12px;
-        background:var(--text);color:var(--bg);
+        width:64px;height:64px;border-radius:10px;
         display:flex;align-items:center;justify-content:center;
-        font-weight:900;font-size:1rem;
         position:relative;overflow:hidden;
         transition:transform .3s var(--spring);
       }
       .brand-mark:hover{transform:scale(1.08) rotate(-2deg)}
-      .brand-mark::after{
-        content:"";position:absolute;inset:0;
-        background:linear-gradient(135deg,rgba(255,255,255,0.25),transparent 50%);
-      }
+      .brand-mark img{width:100%;height:100%;object-fit:contain}
       .brand-text{font-weight:750;font-size:1.02rem;letter-spacing:.2px}
       .brand-sub{font-size:.72rem;color:var(--dim);font-weight:600;letter-spacing:1.2px;text-transform:uppercase}
 
@@ -682,7 +677,7 @@
     <header class="nav" id="mainNav">
       <div class="container nav-inner">
         <a href="#topo" class="brand" aria-label="APX SITES">
-          <div class="brand-mark" aria-hidden="true">A</div>
+          <div class="brand-mark" aria-hidden="true"><img src="./logo.png" alt="APX SITES" /></div>
           <div>
             <div class="brand-text">APX SITES</div>
             <div class="brand-sub">Sites &amp; Sistemas</div>
@@ -700,7 +695,7 @@
         </nav>
 
         <a class="btn btn-primary" href="#orcamento">
-          <span class="btn-text" data-text="Agendar consulta">Agendar consulta</span>
+          <span class="btn-text" data-text="Quero meu site">Quero meu site</span>
         </a>
       </div>
     </header>
@@ -712,16 +707,16 @@
           <div>
             <div class="eyebrow rv">
               <span class="pulse-dot" aria-hidden="true"></span>
-              Vagas limitadas por mês
+              Apenas 5 vagas este mês
             </div>
 
             <h1 id="heroTitle">
-              Seu negócio merece um site que <span class="hl">converte visitantes em clientes.</span>
+              Pare de perder clientes por <span class="hl">não ter um site profissional.</span>
             </h1>
 
             <p class="lead rv rv-d2">
-              Criamos sites profissionais de captação e sistemas de agendamento
-              para negócios locais. Pronto em dias, não em meses.
+              Seu cliente te encontra, agenda e fecha — tudo pelo site,
+              sem você precisar fazer nada. Pronto em dias, não em meses.
             </p>
 
             <ul class="hero-bullets rv rv-d2">
@@ -741,7 +736,7 @@
 
             <div class="hero-actions rv rv-d3">
               <a class="btn btn-primary btn-lg" href="#planos">
-                <span class="btn-text" data-text="Ver planos">Ver planos</span>
+                <span class="btn-text" data-text="Quero meu site">Quero meu site</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </a>
               <button class="btn btn-lg" onclick="openVideoModal()">
@@ -766,7 +761,7 @@
                   <div class="stat"><strong>50+ Sites</strong><span>Criados e publicados</span></div>
                   <div class="stat"><strong>98%</strong><span>Satisfação dos clientes</span></div>
                   <div class="stat"><strong>24/7</strong><span>Suporte humanizado</span></div>
-                  <div class="stat"><strong>~7 dias</strong><span>Prazo médio de entrega</span></div>
+                  <div class="stat"><strong>48h</strong><span>Prazo máximo de entrega</span></div>
                 </div>
               </div>
               <div class="hc-foot">Site de captação, sistema de agendamento ou o combo completo.</div>
@@ -791,7 +786,7 @@
           <div class="proof-grid">
             <div class="proof-item rv"><span class="proof-num" data-count="50" data-suffix="+">0</span><span class="proof-lbl">Sites publicados</span></div>
             <div class="proof-item rv rv-d1"><span class="proof-num" data-count="98" data-suffix="%">0</span><span class="proof-lbl">Clientes satisfeitos</span></div>
-            <div class="proof-item rv rv-d2"><span class="proof-num" data-count="7" data-suffix=" dias">0</span><span class="proof-lbl">Prazo médio de entrega</span></div>
+            <div class="proof-item rv rv-d2"><span class="proof-num" data-count="48" data-suffix="h">0</span><span class="proof-lbl">Prazo máximo de entrega</span></div>
             <div class="proof-item rv rv-d3"><span class="proof-num" data-count="24" data-suffix="/7">0</span><span class="proof-lbl">Suporte disponível</span></div>
           </div>
         </div>
@@ -838,13 +833,13 @@
               <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Essencial</div>
               <div class="price"><strong>R$ 119,99</strong></div>
               <div class="price-mo">+ R$ 29,99/mês (manutenção)</div>
-              <p class="plan-desc">Ideal para ter presença online profissional rapidamente.</p>
+              <p class="plan-desc">Pra quem precisa sair do zero e já começar a captar.</p>
               <ul class="plan-feat">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Design responsivo profissional</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Botão WhatsApp integrado</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Links para redes sociais</li>
               </ul>
-              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Essencial (R$ 119,99) - Sites de captação de cliente. Gostaria de saber mais detalhes!')"><span class="btn-text" data-text="Começar agora">Começar agora</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Essencial (R$ 119,99) - Sites de captação de cliente. Gostaria de saber mais detalhes!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
             </div>
 
             <div class="plan feat rv rv-d1">
@@ -852,28 +847,28 @@
               <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Profissional</div>
               <div class="price"><strong>R$ 199,99</strong></div>
               <div class="price-mo">+ R$ 49,99/mês (manutenção)</div>
-              <p class="plan-desc">Para quem quer transmitir autoridade e atrair mais clientes.</p>
+              <p class="plan-desc">Seus clientes vão confiar antes mesmo de te conhecer.</p>
               <ul class="plan-feat">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Tudo do plano Essencial</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Domínio personalizado incluído</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Galeria organizada de fotos</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Mapa de localização Google</li>
               </ul>
-              <button class="btn btn-primary" onclick="openWhatsApp('Olá! Tenho interesse no Plano Profissional (R$ 199,99) - Sites de captação de cliente. Gostaria de conhecer os detalhes!')"><span class="btn-text" data-text="Começar agora">Começar agora</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+              <button class="btn btn-primary" onclick="openWhatsApp('Olá! Tenho interesse no Plano Profissional (R$ 199,99) - Sites de captação de cliente. Gostaria de conhecer os detalhes!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
             </div>
 
             <div class="plan rv rv-d2">
               <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Premium + Sistema</div>
               <div class="price"><strong>R$ 499,99</strong></div>
               <div class="price-mo">+ R$ 99,99/mês (manutenção)</div>
-              <p class="plan-desc">Automatize seu atendimento com site + sistema de agendamento.</p>
+              <p class="plan-desc">Seu negócio funcionando no automático, 24 horas por dia.</p>
               <ul class="plan-feat">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Tudo do plano Profissional</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Sistema de agendamento online</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Cadastro automático de clientes</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Manutenção grátis no primeiro mês</li>
               </ul>
-              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Premium + Sistema (R$ 499,99) - Sites de captação com agendamento. Quero saber mais!')"><span class="btn-text" data-text="Começar agora">Começar agora</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Premium + Sistema (R$ 499,99) - Sites de captação com agendamento. Quero saber mais!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
             </div>
           </div>
         </div>
@@ -904,7 +899,7 @@
           <p class="s-sub rv">Se tiver alguma dúvida além destas, fale conosco pelo formulário ou WhatsApp.</p>
 
           <div class="faq">
-            <details class="rv"><summary>Quanto tempo leva para o site ficar pronto? <span class="faq-t">+</span></summary><p>Dependendo do plano, de 3 a 10 dias úteis após o briefing aprovado.</p></details>
+            <details class="rv"><summary>Quanto tempo leva para o site ficar pronto? <span class="faq-t">+</span></summary><p>Em até 48 horas após o briefing aprovado, seu site está no ar.</p></details>
             <details class="rv rv-d1"><summary>O sistema de agendamento funciona para diferentes serviços? <span class="faq-t">+</span></summary><p>Sim, o fluxo pode ser ajustado conforme regras de horários, atendimento e necessidades da sua operação — barbearias, salões, studios, clínicas e mais.</p></details>
             <details class="rv"><summary>Vocês cuidam da publicação e configuração inicial? <span class="faq-t">+</span></summary><p>Sim. O objetivo é que você inicie o atendimento com tudo funcionando.</p></details>
             <details class="rv rv-d1"><summary>Posso contratar apenas o site sem o sistema? <span class="faq-t">+</span></summary><p>Sim. Os planos Essencial e Profissional são focados no site. O sistema é incluso no Premium.</p></details>
@@ -918,13 +913,14 @@
       <section class="cta-s" id="orcamento">
         <div class="container">
           <div class="cta-box rv">
-            <div>
-              <h2>Pronto para transformar seu negócio?</h2>
-              <p class="cta-lead">Junte-se aos 50+ empreendedores que já cresceram com APX SITES. Envie seu contato e conte o que você precisa.</p>
+            <div style="text-align:center">
+              <img src="./logo.png" alt="APX SITES" style="width:260px;margin:0 auto 1rem;display:block;opacity:.9" />
+              <h2>Seu concorrente já tem site. E você?</h2>
+              <p class="cta-lead">Enquanto você pensa, seu concorrente está captando. Preencha e a gente conversa em menos de 1 hora.</p>
             </div>
-            <form class="form" action="#" method="post" aria-label="Formulário de orçamento">
+            <form class="form" id="ctaForm" aria-label="Formulário de orçamento" onsubmit="return submitForm(event)">
               <div><label for="nome">Seu nome</label><input id="nome" name="nome" type="text" placeholder="Ex.: Maria" required /></div>
-              <div><label for="contato">WhatsApp ou e-mail</label><input id="contato" name="contato" type="text" placeholder="(21) 99999-9999" required /></div>
+              <div><label for="contato">Seu WhatsApp</label><input id="contato" name="contato" type="text" placeholder="(21) 99999-9999" required /></div>
               <div><label for="mensagem">O que você quer criar?</label><textarea id="mensagem" name="mensagem" placeholder="Ex.: Quero um site para minha barbearia com agendamento online." required></textarea></div>
               <div class="form-act">
                 <button class="btn btn-primary" type="submit"><span class="btn-text" data-text="Enviar pedido">Enviar pedido</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
@@ -966,6 +962,22 @@
 
       /* ── Helpers ── */
       window.openWhatsApp=function(m){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank')};
+
+      /* ── Form → WhatsApp ── */
+      window.submitForm=function(e){
+        e.preventDefault();
+        var nome=document.getElementById('nome').value.trim();
+        var contato=document.getElementById('contato').value.trim();
+        var mensagem=document.getElementById('mensagem').value.trim();
+        if(!nome||!contato||!mensagem)return false;
+        var msg='Olá! Vim pelo site da APX SITES.\n\n'
+          +'*Nome:* '+nome+'\n'
+          +'*WhatsApp:* '+contato+'\n'
+          +'*O que preciso:* '+mensagem;
+        openWhatsApp(msg);
+        document.getElementById('ctaForm').reset();
+        return false;
+      };
       window.openInstagram=function(){window.open(IG,'_blank')};
 
       /* ── Video Modal ── */
