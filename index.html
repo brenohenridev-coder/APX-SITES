@@ -1,616 +1,1225 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./favicon.ico" type="image/png">
-    <title>APX SITES - Sites e Sistemas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="APX SITES - Sites profissionais de captação de clientes e sistemas de agendamento. Converta visitantes em clientes reais." />
+    <link rel="icon" href="./favicon.ico" type="image/png" />
+    <title>APX SITES - Sites de Captação &amp; Sistemas</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
-        
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        @keyframes blob {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(20px, -50px) scale(1.1); }
-            50% { transform: translate(-20px, 20px) scale(0.9); }
-            75% { transform: translate(50px, 50px) scale(1.05); }
-        }
-        
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        .animate-blob {
-            animation: blob 7s infinite;
-        }
-        
-        .animate-blob-delay {
-            animation: blob 7s infinite;
-            animation-delay: 2s;
-        }
-        
-        .animate-slide-in {
-            animation: slideInLeft 1s ease-out forwards;
-        }
-        
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-        
-        .animate-scale-in {
-            animation: scaleIn 0.6s ease-out forwards;
-        }
-        
-        .plan-card {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .plan-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .plan-card.featured {
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        
-        @media (min-width: 768px) {
-            .plan-card.featured {
-                transform: scale(1.05);
-            }
-        }
-        
-        .btn-primary {
-            background: white;
-            color: black;
-            font-weight: 900;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: scale(1.05);
-            background: #f0f0f0;
-        }
-        
-        .btn-primary:active {
-            transform: scale(0.95);
-        }
-        
-        .btn-secondary {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            border-color: rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        .feature-item {
-            transition: all 0.3s ease;
-        }
-        
-        .feature-item:hover {
-            transform: translateX(4px);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(to right, white, white, rgba(255, 255, 255, 0.6));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 50;
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            width: 100%;
-            max-width: 56rem;
-            aspect-ratio: 16 / 9;
-            border-radius: 1rem;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+      :root {
+        --bg: #000000;
+        --surface: rgba(255,255,255,0.03);
+        --surface-2: rgba(255,255,255,0.06);
+        --surface-3: rgba(255,255,255,0.10);
+        --text: #e8eefc;
+        --muted: rgba(232,238,252,0.72);
+        --dim: rgba(232,238,252,0.4);
+        --border: rgba(255,255,255,0.07);
+        --border-h: rgba(255,255,255,0.14);
+        --radius: 18px;
+        --radius-sm: 12px;
+        --max: 1120px;
+        --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        --expo: cubic-bezier(0.16,1,0.3,1);
+        --spring: cubic-bezier(0.34,1.56,0.64,1);
+      }
 
-        /* Carrossel de Imagens */
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
+      *{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth}
 
-        .carousel-image {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-            background-color: black;
-            opacity: 0;
-            animation: carouselFade 15s infinite;
-        }
+      body{
+        font-family:var(--font);
+        color:var(--text);
+        background:var(--bg);
+        line-height:1.5;
+        overflow-x:hidden;
+        -webkit-font-smoothing:antialiased;
+      }
 
-        .carousel-image-1 {
-            animation-delay: 0s;
-        }
+      a{color:inherit;text-decoration:none}
+      img{display:block;max-width:100%}
+      button{font-family:var(--font)}
 
-        .carousel-image-2 {
-            animation-delay: 5s;
-        }
+      .container{width:min(var(--max),calc(100% - 2.5rem));margin:0 auto}
 
-        .carousel-image-3 {
-            animation-delay: 10s;
-        }
+      /* ═══════════════════════════════════════
+         PARTICLE CANVAS
+         ═══════════════════════════════════════ */
+      #particles{
+        position:fixed;top:0;left:0;width:100%;height:100%;
+        z-index:0;pointer-events:none;
+      }
 
-        @keyframes carouselFade {
-            0% {
-                opacity: 1;
-            }
-            33% {
-                opacity: 1;
-            }
-            34% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
+      /* ═══════════════════════════════════════
+         NOISE OVERLAY
+         ═══════════════════════════════════════ */
+      body::before{
+        content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+        opacity:0.03;
+        background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size:256px 256px;
+      }
 
-        /* Instagram Button */
-        .instagram-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-            padding: 0;
-            margin-left: 12px;
-        }
+      /* ═══════════════════════════════════════
+         CURSOR GLOW
+         ═══════════════════════════════════════ */
+      #cursorGlow{
+        position:fixed;width:600px;height:600px;border-radius:50%;
+        background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);
+        pointer-events:none;z-index:1;transform:translate(-50%,-50%);
+        will-change:left,top;
+      }
 
-        .instagram-btn:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
+      /* ═══════════════════════════════════════
+         SCROLL REVEAL
+         ═══════════════════════════════════════ */
+      .rv{opacity:0;transform:translateY(50px);transition:opacity .9s var(--expo),transform .9s var(--expo)}
+      .rv.vis{opacity:1;transform:translateY(0)}
+      .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}
+      .rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
 
-        .instagram-btn svg {
-            width: 24px;
-            height: 24px;
-        }
+      /* ═══════════════════════════════════════
+         GLOW LINE SEPARATOR
+         ═══════════════════════════════════════ */
+      .glow-sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);margin:0 auto;width:50%}
 
-        /* Video Loading Spinner */
-        .video-spinner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            z-index: 10;
-        }
+      /* ═══════════════════════════════════════
+         NAV
+         ═══════════════════════════════════════ */
+      .nav{
+        position:fixed;top:0;left:0;right:0;z-index:100;
+        border-bottom:1px solid transparent;
+        transition:background .5s,border-color .5s,backdrop-filter .5s;
+      }
+      .nav.scrolled{
+        background:rgba(0,0,0,0.6);
+        backdrop-filter:blur(20px) saturate(1.4);
+        -webkit-backdrop-filter:blur(20px) saturate(1.4);
+        border-bottom-color:var(--border);
+      }
+      .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0;gap:1rem}
 
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+      .brand{display:flex;align-items:center;gap:.7rem;cursor:pointer}
+      .brand-mark{
+        width:38px;height:38px;border-radius:12px;
+        background:var(--text);color:var(--bg);
+        display:flex;align-items:center;justify-content:center;
+        font-weight:900;font-size:1rem;
+        position:relative;overflow:hidden;
+        transition:transform .3s var(--spring);
+      }
+      .brand-mark:hover{transform:scale(1.08) rotate(-2deg)}
+      .brand-mark::after{
+        content:"";position:absolute;inset:0;
+        background:linear-gradient(135deg,rgba(255,255,255,0.25),transparent 50%);
+      }
+      .brand-text{font-weight:750;font-size:1.02rem;letter-spacing:.2px}
+      .brand-sub{font-size:.72rem;color:var(--dim);font-weight:600;letter-spacing:1.2px;text-transform:uppercase}
+
+      .nav-links{display:flex;align-items:center;gap:1.6rem;font-weight:600;font-size:.92rem;color:var(--muted)}
+      .nav-links a{cursor:pointer;transition:color .25s;position:relative}
+      .nav-links a:hover{color:var(--text)}
+      .nav-links a::after{
+        content:"";position:absolute;bottom:-4px;left:50%;width:0;height:1px;
+        background:var(--text);transition:all .3s var(--expo);transform:translateX(-50%);
+      }
+      .nav-links a:hover::after{width:100%}
+
+      .ig-link{display:inline-flex;align-items:center;color:var(--muted);transition:color .25s;cursor:pointer}
+      .ig-link:hover{color:var(--text)}
+      .ig-link svg{width:18px;height:18px}
+
+      /* ═══════════════════════════════════════
+         BUTTONS
+         ═══════════════════════════════════════ */
+      .btn{
+        display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+        border-radius:999px;padding:.75rem 1.5rem;
+        font-weight:700;font-size:.9rem;cursor:pointer;
+        transition:all .35s var(--expo);
+        border:1px solid var(--border);
+        background:var(--surface-2);color:var(--text);
+        position:relative;overflow:hidden;
+      }
+      .btn::before{
+        content:"";position:absolute;top:-100%;left:-100%;
+        width:300%;height:300%;
+        background:conic-gradient(from 0deg,transparent,rgba(255,255,255,0.08),transparent 30%);
+        opacity:0;transition:opacity .4s;
+        animation:btnShine 4s linear infinite paused;
+      }
+      .btn:hover::before{opacity:1;animation-play-state:running}
+      @keyframes btnShine{to{transform:rotate(360deg)}}
+
+      .btn:hover{border-color:var(--border-h);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.5)}
+
+      .btn-primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+      .btn-primary:hover{
+        background:#fff;border-color:#fff;
+        box-shadow:0 0 40px rgba(255,255,255,.12),0 8px 30px rgba(0,0,0,.5);
+      }
+
+      .btn-lg{padding:.9rem 2rem;font-size:.95rem}
+      .btn svg{flex-shrink:0}
+
+      /* scramble text container */
+      .btn-text{display:inline;font-family:var(--font)}
+
+      /* ═══════════════════════════════════════
+         HERO
+         ═══════════════════════════════════════ */
+      .hero{
+        min-height:100vh;display:flex;align-items:center;
+        padding:8rem 0 4rem;position:relative;z-index:2;
+      }
+      .hero-grid{
+        display:grid;grid-template-columns:1.15fr .85fr;
+        gap:3rem;align-items:center;width:100%;
+      }
+
+      .eyebrow{
+        display:inline-flex;align-items:center;gap:.5rem;
+        padding:.4rem .85rem;border-radius:999px;
+        font-weight:650;font-size:.85rem;
+        color:var(--muted);background:var(--surface);border:1px solid var(--border);
+      }
+
+      .pulse-dot{
+        width:8px;height:8px;border-radius:50%;
+        background:var(--text);position:relative;
+      }
+      .pulse-dot::after{
+        content:"";position:absolute;inset:-4px;border-radius:50%;
+        border:1px solid var(--text);
+        animation:pulse 2s ease-out infinite;
+      }
+      @keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.5);opacity:0}}
+
+      /* ── Hero Title: split word reveal ── */
+      h1{
+        font-size:clamp(2.4rem,4.5vw,3.6rem);
+        line-height:1.08;font-weight:750;
+        letter-spacing:-.8px;margin:.9rem 0 1.2rem;
+      }
+      .word{
+        display:inline-block;opacity:0;
+        transform:translateY(30px) rotateX(-40deg);
+        transition:opacity .7s var(--expo),transform .7s var(--expo);
+        transform-origin:center bottom;
+      }
+      .words-visible .word{opacity:1;transform:translateY(0) rotateX(0)}
+
+      h1 .hl{
+        position:relative;display:inline;
+        background:linear-gradient(180deg,transparent 60%,rgba(255,255,255,.08) 60%);
+        padding:0 .1em;
+      }
+
+      .lead{font-size:1.06rem;color:var(--muted);margin-bottom:1.8rem;max-width:52ch;line-height:1.65}
+
+      .hero-bullets{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;margin-bottom:2rem}
+
+      .pill{
+        display:inline-flex;align-items:center;gap:.5rem;
+        padding:.5rem .85rem;border-radius:999px;
+        background:var(--surface);border:1px solid var(--border);
+        color:var(--text);font-weight:650;font-size:.88rem;
+        transition:all .3s var(--expo);
+      }
+      .pill:hover{border-color:var(--border-h);background:var(--surface-2)}
+
+      .chk{
+        width:18px;height:18px;border-radius:50%;
+        background:var(--text);display:inline-flex;
+        align-items:center;justify-content:center;flex-shrink:0;
+      }
+      .chk svg{width:10px;height:10px;color:var(--bg)}
+
+      .hero-actions{display:flex;flex-wrap:wrap;gap:.85rem;align-items:center}
+
+      /* ── Hero Card: 3D TILT ── */
+      .hero-card-wrap{perspective:800px}
+      .hero-card{
+        border-radius:var(--radius);
+        background:rgba(255,255,255,.03);
+        backdrop-filter:blur(20px) saturate(1.2);
+        -webkit-backdrop-filter:blur(20px) saturate(1.2);
+        border:1px solid rgba(255,255,255,.08);
+        overflow:hidden;
+        box-shadow:0 40px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);
+        position:relative;
+        transition:transform .4s var(--expo),box-shadow .4s var(--expo);
+        transform-style:preserve-3d;
+        will-change:transform;
+      }
+      .hero-card::before{
+        content:"";position:absolute;top:0;left:0;
+        width:100%;height:1px;
+        background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+      }
+      /* Shine layer that moves with tilt */
+      .hero-card .shine{
+        position:absolute;inset:0;z-index:5;pointer-events:none;
+        background:radial-gradient(600px circle at var(--shine-x,50%) var(--shine-y,50%),rgba(255,255,255,.06),transparent 50%);
+        opacity:0;transition:opacity .4s;
+      }
+      .hero-card:hover .shine{opacity:1}
+
+      .carousel-wrap{
+        position:relative;height:230px;
+        background:rgba(0,0,0,.4);overflow:hidden;
+      }
+      .carousel-wrap img{
+        position:absolute;width:100%;height:100%;
+        object-fit:contain;object-position:center;
+        opacity:0;animation:cFade 25s infinite;will-change:opacity,transform;
+      }
+      .carousel-wrap img:nth-child(1){animation-delay:0s}
+      .carousel-wrap img:nth-child(2){animation-delay:5s}
+      .carousel-wrap img:nth-child(3){animation-delay:10s}
+      .carousel-wrap img:nth-child(4){animation-delay:15s}
+      .carousel-wrap img:nth-child(5){animation-delay:20s}
+      @keyframes cFade{
+        0%{opacity:0;transform:scale(1.04)}
+        5%{opacity:1;transform:scale(1)}
+        18%{opacity:1;transform:scale(1)}
+        23%{opacity:0;transform:scale(.97)}
+        100%{opacity:0}
+      }
+
+      .hc-body{padding:1.2rem}
+      .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+      .stat{
+        padding:.8rem;border-radius:10px;
+        background:var(--surface);border:1px solid var(--border);
+        transition:all .3s var(--expo);
+      }
+      .stat:hover{background:var(--surface-2);border-color:var(--border-h)}
+      .stat strong{display:block;font-size:1.15rem;font-weight:800;letter-spacing:-.4px;margin-bottom:.1rem}
+      .stat span{color:var(--dim);font-weight:600;font-size:.82rem}
+
+      .hc-foot{
+        padding:.9rem 1.2rem;border-top:1px solid var(--border);
+        color:var(--muted);font-weight:650;font-size:.85rem;
+      }
+
+      /* ═══════════════════════════════════════
+         VIDEO
+         ═══════════════════════════════════════ */
+      .vid-section{padding:0 0 5rem;position:relative;z-index:2}
+      .vid-thumb{
+        position:relative;border-radius:var(--radius);overflow:hidden;
+        border:1px solid var(--border);cursor:pointer;aspect-ratio:16/9;
+        background:url("./APX_SITES.png") center/cover no-repeat;
+        box-shadow:0 40px 100px rgba(0,0,0,.7);
+        transition:all .5s var(--expo);
+      }
+      .vid-thumb:hover{
+        transform:scale(1.005) translateY(-3px);
+        box-shadow:0 50px 120px rgba(0,0,0,.8),0 0 80px rgba(255,255,255,.015);
+      }
+      .vid-overlay{
+        position:absolute;inset:0;
+        background:rgba(0,0,0,.4);display:flex;
+        align-items:center;justify-content:center;transition:background .4s;
+      }
+      .vid-thumb:hover .vid-overlay{background:rgba(0,0,0,.55)}
+
+      .play-c{
+        width:80px;height:80px;border-radius:50%;
+        background:rgba(255,255,255,.08);
+        backdrop-filter:blur(20px);
+        -webkit-backdrop-filter:blur(20px);
+        border:1px solid rgba(255,255,255,.15);
+        display:flex;align-items:center;justify-content:center;
+        transition:all .4s var(--expo);
+        box-shadow:0 16px 48px rgba(0,0,0,.4);
+      }
+      .vid-thumb:hover .play-c{
+        transform:scale(1.1);background:rgba(255,255,255,.12);
+        border-color:rgba(255,255,255,.25);
+        box-shadow:0 0 60px rgba(255,255,255,.06);
+      }
+      .play-c svg{width:24px;height:24px;margin-left:3px;fill:var(--text)}
+
+      .vid-cap{text-align:center;color:var(--dim);font-size:.85rem;font-weight:600;margin-top:1rem}
+
+      /* ═══════════════════════════════════════
+         SOCIAL PROOF — Animated Counters
+         ═══════════════════════════════════════ */
+      .proof{
+        position:relative;z-index:2;padding:3.5rem 0;
+        border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+        background:rgba(255,255,255,.01);
+      }
+      .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+      .proof-item{position:relative}
+      .proof-item:not(:last-child)::after{
+        content:"";position:absolute;right:-1rem;top:10%;height:80%;
+        width:1px;background:var(--border);
+      }
+      .proof-num{
+        font-size:2.8rem;font-weight:800;letter-spacing:-1.5px;
+        display:block;margin-bottom:.15rem;
+        background:linear-gradient(180deg,var(--text),rgba(232,238,252,.45));
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        background-clip:text;
+      }
+      .proof-lbl{color:var(--dim);font-weight:600;font-size:.88rem}
+
+      /* ═══════════════════════════════════════
+         SECTIONS
+         ═══════════════════════════════════════ */
+      section{position:relative;z-index:2;padding:5rem 0}
+      .s-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--dim);margin-bottom:.85rem}
+      .s-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:750;letter-spacing:-.5px;margin-bottom:.7rem;line-height:1.15}
+      .s-sub{color:var(--muted);max-width:55ch;margin-bottom:3rem;font-size:1.02rem;line-height:1.7}
+
+      /* ═══════════════════════════════════════
+         CARDS — Spotlight + Border Beam
+         ═══════════════════════════════════════ */
+      .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+
+      .card{
+        border-radius:var(--radius);
+        background:var(--surface);border:1px solid var(--border);
+        padding:1.75rem;position:relative;overflow:hidden;
+        transition:all .4s var(--expo);cursor:default;
+      }
+      /* Spotlight follows mouse */
+      .card::before{
+        content:"";position:absolute;inset:0;
+        background:radial-gradient(500px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.05),transparent 40%);
+        pointer-events:none;opacity:0;transition:opacity .4s;
+      }
+      .card:hover::before{opacity:1}
+      .card:hover{
+        border-color:var(--border-h);transform:translateY(-3px);
+        box-shadow:0 20px 60px rgba(0,0,0,.4);
+      }
+
+      .c-icon{
+        width:48px;height:48px;border-radius:14px;
+        background:var(--surface-2);border:1px solid var(--border);
+        display:inline-flex;align-items:center;justify-content:center;
+        margin-bottom:1.2rem;transition:all .3s;
+      }
+      .card:hover .c-icon{background:var(--surface-3);border-color:var(--border-h)}
+      .c-icon svg{width:22px;height:22px;color:var(--text)}
+
+      .card h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;letter-spacing:-.2px}
+      .card>p{color:var(--muted);font-size:.9rem;line-height:1.6}
+
+      /* ═══════════════════════════════════════
+         PRICING — with BORDER BEAM on featured
+         ═══════════════════════════════════════ */
+      .pricing-s{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.008)}
+      .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+
+      .plan{
+        border-radius:var(--radius);background:var(--surface);
+        border:1px solid var(--border);padding:2rem;
+        display:flex;flex-direction:column;position:relative;overflow:hidden;
+        transition:all .4s var(--expo);
+      }
+      .plan:hover{border-color:var(--border-h);transform:translateY(-3px);box-shadow:0 24px 64px rgba(0,0,0,.5)}
+
+      /* ── BORDER BEAM: animated light traveling the border ── */
+      .plan.feat{border-color:transparent;background:var(--surface-2)}
+      .plan.feat::before{
+        content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1px;
+        background:conic-gradient(from var(--beam-angle,0deg),transparent 0%,rgba(255,255,255,.3) 5%,transparent 10%);
+        -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+        -webkit-mask-composite:xor;
+        mask-composite:exclude;
+        pointer-events:none;
+        animation:beamSpin 4s linear infinite;
+      }
+      @keyframes beamSpin{to{--beam-angle:360deg}}
+      @property --beam-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+
+      .plan.feat::after{
+        content:"";position:absolute;inset:0;
+        background:radial-gradient(600px circle at 50% 0%,rgba(255,255,255,.04),transparent 60%);
+        pointer-events:none;
+      }
+
+      .plan-badge{
+        position:absolute;top:0;left:50%;transform:translateX(-50%);
+        padding:.3rem 1.1rem .35rem;border-radius:0 0 10px 10px;
+        background:var(--text);color:var(--bg);
+        font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+      }
+
+      .plan-name{display:flex;align-items:center;gap:.5rem;font-size:1.08rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.2px}
+      .plan-name svg{width:20px;height:20px;color:var(--muted)}
+
+      .price{display:flex;align-items:baseline;gap:.35rem;margin-bottom:.2rem}
+      .price strong{font-size:2.2rem;font-weight:800;letter-spacing:-1px}
+      .price-mo{color:var(--dim);font-size:.82rem;font-weight:600;margin-bottom:1.2rem}
+      .plan-desc{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);line-height:1.55}
+
+      .plan-feat{list-style:none;margin-bottom:2rem;flex:1}
+      .plan-feat li{
+        display:flex;align-items:flex-start;gap:.6rem;padding:.4rem 0;
+        color:var(--muted);font-size:.88rem;font-weight:600;
+      }
+      .plan-feat li svg{width:16px;height:16px;flex-shrink:0;margin-top:3px;color:var(--text)}
+
+      .plan .btn{width:100%;justify-content:center}
+
+      /* ═══════════════════════════════════════
+         STEPS — with animated connecting line
+         ═══════════════════════════════════════ */
+      .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative}
+      .steps-line{
+        position:absolute;top:38px;left:calc(12.5% + 18px);right:calc(12.5% + 18px);
+        height:1px;overflow:hidden;
+      }
+      .steps-line::after{
+        content:"";display:block;width:100%;height:100%;
+        background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+        animation:lineGlow 3s ease-in-out infinite;
+      }
+      @keyframes lineGlow{
+        0%,100%{opacity:.3;transform:scaleX(.8)}
+        50%{opacity:1;transform:scaleX(1)}
+      }
+
+      .step{
+        position:relative;padding:1.5rem;border-radius:var(--radius);
+        background:var(--surface);border:1px solid var(--border);z-index:1;
+        transition:all .4s var(--expo);
+      }
+      .step:hover{border-color:var(--border-h);transform:translateY(-2px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+
+      .step-num{
+        width:36px;height:36px;border-radius:12px;
+        background:var(--text);color:var(--bg);
+        display:inline-flex;align-items:center;justify-content:center;
+        font-weight:800;font-size:.88rem;margin-bottom:1rem;
+        box-shadow:0 4px 20px rgba(255,255,255,.06);
+      }
+      .step h3{font-size:1rem;font-weight:700;margin-bottom:.4rem;letter-spacing:-.2px}
+      .step p{color:var(--muted);font-size:.86rem;line-height:1.55}
+
+      /* ═══════════════════════════════════════
+         FAQ
+         ═══════════════════════════════════════ */
+      .faq{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+      details{
+        border-radius:var(--radius-sm);border:1px solid var(--border);
+        background:var(--surface);padding:1.1rem 1.3rem;
+        transition:all .3s var(--expo);
+      }
+      details:hover{border-color:var(--border-h)}
+      details[open]{background:var(--surface-2);border-color:var(--border-h)}
+
+      summary{
+        cursor:pointer;font-weight:700;font-size:.92rem;
+        list-style:none;display:flex;align-items:center;
+        justify-content:space-between;gap:1rem;
+      }
+      summary::-webkit-details-marker{display:none}
+
+      .faq-t{
+        width:24px;height:24px;border-radius:8px;
+        background:var(--surface-2);border:1px solid var(--border);
+        display:flex;align-items:center;justify-content:center;flex-shrink:0;
+        transition:all .3s var(--spring);font-size:.88rem;color:var(--muted);
+      }
+      details[open] .faq-t{transform:rotate(45deg);background:var(--surface-3)}
+
+      details p{margin-top:.8rem;color:var(--muted);font-size:.9rem;line-height:1.65}
+
+      /* ═══════════════════════════════════════
+         CTA
+         ═══════════════════════════════════════ */
+      .cta-s{padding:5rem 0 6rem;position:relative;z-index:2}
+      .cta-box{
+        border-radius:calc(var(--radius) + 4px);
+        background:rgba(255,255,255,.03);
+        backdrop-filter:blur(32px) saturate(1.3);
+        -webkit-backdrop-filter:blur(32px) saturate(1.3);
+        border:1px solid rgba(255,255,255,.08);
+        padding:3rem;display:grid;grid-template-columns:1.1fr .9fr;
+        gap:2.5rem;align-items:center;position:relative;overflow:hidden;
+        box-shadow:0 50px 100px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);
+      }
+      .cta-box::before{
+        content:"";position:absolute;top:0;left:0;width:100%;height:1px;
+        background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+      }
+      /* Orb glow */
+      .cta-box::after{
+        content:"";position:absolute;top:-40%;right:-15%;
+        width:500px;height:500px;border-radius:50%;
+        background:radial-gradient(circle,rgba(255,255,255,.025),transparent 70%);
+        pointer-events:none;animation:orbFloat 15s ease-in-out infinite;
+      }
+      @keyframes orbFloat{
+        0%,100%{transform:translate(0,0) scale(1)}
+        50%{transform:translate(-30px,20px) scale(1.1)}
+      }
+
+      .cta-box h2{font-size:clamp(1.5rem,2.5vw,2.1rem);font-weight:750;letter-spacing:-.5px;line-height:1.15;margin-bottom:.85rem}
+      .cta-lead{color:var(--muted);font-size:1rem;line-height:1.7}
+
+      .form{display:grid;gap:.85rem;position:relative;z-index:1}
+      label{color:var(--muted);font-weight:600;font-size:.82rem;margin-bottom:.2rem;display:block;letter-spacing:.3px}
+
+      input,textarea{
+        width:100%;border-radius:10px;
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.04);
+        color:var(--text);padding:.8rem 1rem;outline:none;
+        font-weight:600;font-family:var(--font);font-size:.9rem;
+        transition:all .3s var(--expo);
+      }
+      input::placeholder,textarea::placeholder{color:var(--dim)}
+      textarea{min-height:80px;resize:vertical}
+      input:focus,textarea:focus{
+        border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.06);
+        box-shadow:0 0 0 3px rgba(255,255,255,.03),0 0 30px rgba(255,255,255,.015);
+      }
+
+      .form-act{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center}
+      .form-hint{color:var(--dim);font-size:.8rem;font-weight:600}
+
+      /* ═══════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════ */
+      .footer{
+        position:relative;z-index:2;padding:2rem 0;
+        color:var(--dim);border-top:1px solid var(--border);
+        font-size:.85rem;font-weight:600;
+      }
+      .footer-inner{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}
+      .sm-links{display:flex;flex-wrap:wrap;gap:1.5rem}
+      .sm-links a{color:var(--dim);transition:color .25s;cursor:pointer}
+      .sm-links a:hover{color:var(--text)}
+
+      /* ═══════════════════════════════════════
+         MODAL
+         ═══════════════════════════════════════ */
+      .modal{
+        display:none;position:fixed;inset:0;
+        background:rgba(0,0,0,.92);z-index:200;
+        backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+      }
+      .modal.on{display:flex;align-items:center;justify-content:center;animation:mIn .3s var(--expo)}
+      @keyframes mIn{from{opacity:0}to{opacity:1}}
+
+      .m-close{
+        position:absolute;top:1.5rem;right:1.5rem;
+        background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+        backdrop-filter:blur(12px);color:var(--text);cursor:pointer;
+        z-index:201;width:44px;height:44px;border-radius:50%;
+        display:flex;align-items:center;justify-content:center;transition:all .25s;
+      }
+      .m-close:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
+
+      .m-content{
+        width:calc(100% - 2rem);max-width:58rem;aspect-ratio:16/9;
+        border-radius:var(--radius);overflow:hidden;position:relative;
+        background:#000;border:1px solid var(--border);
+        box-shadow:0 40px 120px rgba(0,0,0,.7);
+        animation:mCIn .4s var(--expo) .1s both;
+      }
+      @keyframes mCIn{from{opacity:0;transform:scale(.95) translateY(12px)}to{opacity:1;transform:none}}
+
+      .v-spin{
+        position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+        border:2px solid rgba(255,255,255,.08);border-top-color:var(--text);
+        border-radius:50%;width:36px;height:36px;animation:spin .8s linear infinite;
+      }
+      @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+      /* ═══════════════════════════════════════
+         RESPONSIVE
+         ═══════════════════════════════════════ */
+      @media(max-width:980px){
+        .hero{min-height:auto;padding:7rem 0 3rem}
+        .hero-grid{grid-template-columns:1fr;gap:2.5rem}
+        .grid-3,.pricing{grid-template-columns:1fr}
+        .steps{grid-template-columns:repeat(2,1fr)}
+        .steps-line{display:none}
+        .faq{grid-template-columns:1fr}
+        .cta-box{grid-template-columns:1fr;padding:2rem}
+        .nav-links{display:none}
+        .proof-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
+        .proof-item:nth-child(2)::after{display:none}
+        #cursorGlow{display:none}
+      }
+
+      @media(max-width:480px){
+        .steps{grid-template-columns:1fr}
+        h1{font-size:2rem}
+        .cta-box{padding:1.5rem}
+        .proof-num{font-size:2rem}
+      }
+
+      @media(prefers-reduced-motion:reduce){
+        *,*::before,*::after{
+          animation-duration:.01ms!important;animation-iteration-count:1!important;
+          transition-duration:.01ms!important;scroll-behavior:auto!important;
         }
+        #particles,.cursor-glow{display:none}
+        .rv{opacity:1;transform:none}
+        .word{opacity:1;transform:none}
+      }
     </style>
-</head>
-<body class="bg-black text-white overflow-x-hidden">
-    <!-- Background Elements -->
-    <div class="fixed inset-0 z-0 pointer-events-none">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-white opacity-[0.02] rounded-full blur-3xl animate-blob"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-[0.02] rounded-full blur-3xl animate-blob-delay"></div>
-    </div>
+  </head>
+  <body>
+    <!-- Particle Canvas -->
+    <canvas id="particles" aria-hidden="true"></canvas>
 
-    <!-- Header -->
-    <header class="relative z-40 border-b border-white border-opacity-10 bg-black bg-opacity-80 backdrop-blur sticky top-0">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                    <span class="text-black font-black text-xl">A</span>
-                </div>
-                <h1 class="text-2xl font-black tracking-tighter">APX SITES</h1>
-                <button onclick="openInstagram()" class="instagram-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <circle cx="17.5" cy="6.5" r="1.5" fill="white"></circle>
-                    </svg>
-                </button>
-            </div>
-            <div class="text-sm text-gray-400">Sites de Captação de Cliente & Sistemas</div>
-        </div>
+    <!-- Cursor Glow -->
+    <div id="cursorGlow" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <header class="nav" id="mainNav">
+      <div class="container nav-inner">
+        <a href="#topo" class="brand" aria-label="APX SITES">
+          <div class="brand-mark" aria-hidden="true">A</div>
+          <div>
+            <div class="brand-text">APX SITES</div>
+            <div class="brand-sub">Sites &amp; Sistemas</div>
+          </div>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegação">
+          <a href="#beneficios">Benefícios</a>
+          <a href="#planos">Planos</a>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#faq">FAQ</a>
+          <a href="javascript:void(0)" onclick="openInstagram()" class="ig-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"></circle></svg>
+          </a>
+        </nav>
+
+        <a class="btn btn-primary" href="#orcamento">
+          <span class="btn-text" data-text="Agendar consulta">Agendar consulta</span>
+        </a>
+      </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative z-10 pt-20 pb-32 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8 animate-slide-in">
-                    <div class="space-y-4">
-                        <h2 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-tight">
-                            Sites que
-                            <span class="block gradient-text">Capturam Clientes</span>
-                        </h2>
-                        <p class="text-lg text-gray-400 max-w-lg leading-relaxed">
-                            Plataforma profissional para criar sites que convertem visitantes em clientes. Sem complicações, sem códigos. Puro resultado.
-                        </p>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
-                        <button onclick="document.getElementById('plans').scrollIntoView({behavior: 'smooth'})" class="group px-8 py-4 bg-white text-black font-bold text-lg rounded-lg hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2">
-                            Ver Planos
-                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                        </button>
-                        <button onclick="openVideoModal()" class="px-8 py-4 border border-white border-opacity-30 text-white font-bold rounded-lg hover:border-opacity-100 transition-all duration-300 flex items-center justify-center gap-2 group">
-                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M5 3l14 9-14 9V3z" />
-                            </svg>
-                            Assistir Demo
-                        </button>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white border-opacity-10">
-                        <div class="space-y-1">
-                            <p class="text-2xl font-black">50+</p>
-                            <p class="text-xs text-gray-500">Sites Criados</p>
-                        </div>
-                        <div class="space-y-1">
-                            <p class="text-2xl font-black">98%</p>
-                            <p class="text-xs text-gray-500">Satisfação</p>
-                        </div>
-                        <div class="space-y-1">
-                            <p class="text-2xl font-black">24/7</p>
-                            <p class="text-xs text-gray-500">Suporte</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative h-96 sm:h-full min-h-96 rounded-2xl overflow-hidden group">
-                    <!-- Carrossel de imagens -->
-                    <div class="carousel-container w-full h-full">
-                        <img src="./CAP1.png" alt="Portfólio 1" class="carousel-image carousel-image-1">
-                        <img src="./CAP2.png" alt="Portfólio 2" class="carousel-image carousel-image-2">
-                        <img src="./CAP3.png" alt="Portfólio 3" class="carousel-image carousel-image-3">
-                        <img src="./CAP4.png" alt="Portfólio 4" class="carousel-image carousel-image-4">
-                        <img src="./CAP5.png" alt="Portfólio 5" class="carousel-image carousel-image-5">
-                    </div>
-                    <div class="absolute inset-0 border border-white border-opacity-10 rounded-2xl"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Video Section -->
-    <section class="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto">
-            <div class="aspect-video rounded-2xl overflow-hidden group cursor-pointer" onclick="openVideoModal()" style="background-image: url('./APX_SITES.png'); background-size: cover; background-position: center;">
-                <div class="w-full h-full bg-gradient-to-br from-white to-gray-700 opacity-10 flex items-center justify-center relative">
-                    <div class="absolute inset-0 bg-black opacity-40 group-hover:opacity-60 transition-all duration-300"></div>
-                    <div class="relative z-10 w-20 h-20 rounded-full border-2 border-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:bg-white group-hover:bg-opacity-10">
-                        <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M5 3l14 9-14 9V3z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <p class="text-center text-gray-500 text-sm mt-6">Clique para assistir como seus sites podem crescer seus negócios</p>
-        </div>
-    </section>
-
-    <!-- Plans Section -->
-    <section id="plans" class="relative z-10 py-32 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center space-y-4 mb-20">
-                <h3 class="text-4xl sm:text-5xl font-black tracking-tighter">Planos que Crescem com Você</h3>
-                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Escolha o plano perfeito para seu negócio. Preços justos, sem surpresas.</p>
+    <main>
+      <!-- ═══ HERO ═══ -->
+      <div class="container hero" id="topo">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow rv">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              Vagas limitadas por mês
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
-                <!-- Plano Essencial -->
-                <div class="plan-card border border-white border-opacity-20 rounded-2xl overflow-hidden">
-                    <div class="relative z-10 p-8 sm:p-10 space-y-8 bg-black">
-                        <div class="space-y-3">
-                            <p class="text-4xl">🥉</p>
-                            <h4 class="text-2xl font-black">Plano Essencial</h4>
-                            <p class="text-sm text-gray-400">Ideal para presença online rápida</p>
-                        </div>
-                        <div class="space-y-2">
-                            <p class="text-5xl font-black">R$ 119,99</p>
-                            <p class="text-xs text-gray-500">+ R$ 29,99/mês de manutenção</p>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Site profissional com botão direto para WhatsApp e redes sociais.</p>
-                        <button onclick="openWhatsApp('Olá! Tenho interesse no Plano Essencial (R$ 119,99) - Sites de captação de cliente. Gostaria de saber mais detalhes!')" class="w-full py-4 rounded-lg font-bold text-lg border border-white border-opacity-30 hover:border-opacity-100 hover:bg-white hover:bg-opacity-5 transition-all duration-300">
-                            Começar Agora →
-                        </button>
-                        <div class="space-y-3 pt-6 border-t border-white border-opacity-10">
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Design responsivo profissional</span>
-                            </div>
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Botão WhatsApp integrado</span>
-                            </div>
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Links para redes sociais</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h1 id="heroTitle">
+              Seu negócio merece um site que <span class="hl">converte visitantes em clientes.</span>
+            </h1>
 
-                <!-- Plano Profissional (Featured) -->
-                <div class="plan-card featured border border-white border-opacity-50 rounded-2xl overflow-visible relative">
-                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 px-4 py-1 bg-white text-black text-xs font-black rounded-full z-20 whitespace-nowrap">
-                        MAIS PROCURADO
-                    </div>
-                    <div class="overflow-hidden rounded-2xl">
-                    <div class="relative z-10 p-8 sm:p-10 space-y-8 bg-black">
-                        <div class="space-y-3">
-                            <p class="text-4xl">🥈</p>
-                            <h4 class="text-2xl font-black">Plano Profissional</h4>
-                            <p class="text-sm text-gray-400">Passa muito mais autoridade</p>
-                        </div>
-                        <div class="space-y-2">
-                            <p class="text-5xl font-black">R$ 199,99</p>
-                            <p class="text-xs text-gray-500">+ R$ 49,99/mês de manutenção</p>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Site mais completo, com seções organizadas, fotos, mapa de localização e domínio personalizado.</p>
-                        <button onclick="openWhatsApp('Olá! Tenho interesse no Plano Profissional (R$ 199,99) - Sites de captação de cliente. Gostaria de conhecer os detalhes!')" class="w-full py-4 rounded-lg font-bold text-lg bg-white text-black hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all duration-300">
-                            Começar Agora →
-                        </button>
-                        <div class="space-y-3 pt-6 border-t border-white border-opacity-10">
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Tudo do plano essencial</span>
-                            </div>
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Domínio personalizado incluído</span>
-                            </div>
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Galeria organizada de fotos</span>
-                            </div>
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Mapa de localização Google</span>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <!-- Plano Premium -->
-                <div class="plan-card border border-white border-opacity-20 rounded-2xl overflow-hidden">
-                    <div class="relative z-10 p-8 sm:p-10 space-y-8 bg-black">
-                        <div class="space-y-3">
-                            <p class="text-4xl">🥇</p>
-                            <h4 class="text-2xl font-black">Plano Premium + Sistema</h4>
-                            <p class="text-sm text-gray-400">Automatiza todo seu atendimento</p>
-                        </div>
-                        <div class="space-y-2">
-                            <p class="text-5xl font-black">R$ 499,99</p>
-                            <p class="text-xs text-gray-500">+ R$ 99,99/mês de manutenção</p>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Além do site profissional, inclui sistema de agendamento online e cadastro de clientes, ideal para sua barbearia, estudios de lash designe, salão de beleza e manicure.</p>
-                        <button onclick="openWhatsApp('Olá! Tenho interesse no Plano Premium Sistema (R$ 499,99) - Sites de captação de cliente com agendamento. Quero saber mais!')" class="w-full py-4 rounded-lg font-bold text-lg border border-white border-opacity-30 hover:border-opacity-100 hover:bg-white hover:bg-opacity-5 transition-all duration-300">
-                            Começar Agora →
-                        </button>
-                        <div class="space-y-3 pt-6 border-t border-white border-opacity-10">
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Tudo do plano profissional</span>
-                            </div>
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Sistema de agendamento online</span>
-                            </div>
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Cadastro automático de clientes</span>
-                            </div>
-                            <div class="feature-item flex items-start gap-3">
-                                <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm text-gray-300">Manutenção grátis no primeiro mês.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="relative z-10 py-32 px-4 sm:px-6 lg:px-8 border-t border-white border-opacity-10">
-        <div class="max-w-7xl mx-auto">
-            <h3 class="text-4xl sm:text-5xl font-black tracking-tighter mb-16 text-center">PORQUE APX SITES?</h3>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="space-y-3 p-6 rounded-lg border border-white border-opacity-10 hover:border-opacity-30 transition-all duration-300 group">
-                    <h4 class="text-lg font-bold">Profissionalismo Garantido</h4>
-                    <p class="text-gray-400 text-sm">Cada site é desenvolvido seguindo padrões internacionais de design e UX.</p>
-                </div>
-                <div class="space-y-3 p-6 rounded-lg border border-white border-opacity-10 hover:border-opacity-30 transition-all duration-300 group">
-                    <h4 class="text-lg font-bold">Velocidade de Implementação</h4>
-                    <p class="text-gray-400 text-sm">Seu site fica pronto em dias, não em meses.</p>
-                </div>
-                <div class="space-y-3 p-6 rounded-lg border border-white border-opacity-10 hover:border-opacity-30 transition-all duration-300 group">
-                    <h4 class="text-lg font-bold">Sem Conhecimento Técnico</h4>
-                    <p class="text-gray-400 text-sm">Gerenciar seu site é tão fácil quanto enviar um email.</p>
-                </div>
-                <div class="space-y-3 p-6 rounded-lg border border-white border-opacity-10 hover:border-opacity-30 transition-all duration-300 group">
-                    <h4 class="text-lg font-bold">Segurança de Nível Empresarial</h4>
-                    <p class="text-gray-400 text-sm">Certificados SSL, backups automáticos e proteção contra ataques.</p>
-                </div>
-                <div class="space-y-3 p-6 rounded-lg border border-white border-opacity-10 hover:border-opacity-30 transition-all duration-300 group">
-                    <h4 class="text-lg font-bold">Integração WhatsApp Nativa</h4>
-                    <p class="text-gray-400 text-sm">Seus clientes falam direto com você pelo WhatsApp.</p>
-                </div>
-                <div class="space-y-3 p-6 rounded-lg border border-white border-opacity-10 hover:border-opacity-30 transition-all duration-300 group">
-                    <h4 class="text-lg font-bold">Suporte Humanizado 24/7</h4>
-                    <p class="text-gray-400 text-sm">Equipe real pronta para ajudar quando você precisar.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="relative z-10 py-32 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center space-y-8">
-            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter">
-                Pronto para Transformar Seu Negócio?
-            </h2>
-            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                Junte-se aos 50+ empresários que já cresceram com APX SITES
+            <p class="lead rv rv-d2">
+              Criamos sites profissionais de captação e sistemas de agendamento
+              para negócios locais. Pronto em dias, não em meses.
             </p>
-            <button onclick="openWhatsApp('Olá! Gostaria de agendar uma consulta grátis sobre os sites de captação e Sistemas.')" class="inline-block px-12 py-5 bg-white text-black font-black text-lg rounded-lg hover:scale-105 active:scale-95 transition-all duration-300">
-                Agendar Consulta Grátis →
-            </button>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="relative z-10 border-t border-white border-opacity-10 py-12 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-50">
-        <div class="max-w-7xl mx-auto text-center text-gray-500 text-sm space-y-4">
-            <p>© 2024 APX SITES. Sites de Captação de Cliente.</p>
-            <p>Desenvolvido com excelência para seu sucesso.</p>
+            <ul class="hero-bullets rv rv-d2">
+              <li class="pill">
+                <span class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                Site com foco em conversão
+              </li>
+              <li class="pill">
+                <span class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                Agendamento online integrado
+              </li>
+              <li class="pill">
+                <span class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                WhatsApp direto no site
+              </li>
+            </ul>
+
+            <div class="hero-actions rv rv-d3">
+              <a class="btn btn-primary btn-lg" href="#planos">
+                <span class="btn-text" data-text="Ver planos">Ver planos</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <button class="btn btn-lg" onclick="openVideoModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+                <span class="btn-text" data-text="Assistir demo">Assistir demo</span>
+              </button>
+            </div>
+          </div>
+
+          <aside class="hero-card-wrap rv rv-d2" aria-label="Portfólio">
+            <div class="hero-card" id="heroCard">
+              <div class="shine"></div>
+              <div class="carousel-wrap">
+                <img src="./CAP1.png" alt="Exemplo de site criado 1" />
+                <img src="./CAP2.png" alt="Exemplo de site criado 2" />
+                <img src="./CAP3.png" alt="Exemplo de site criado 3" />
+                <img src="./CAP4.png" alt="Exemplo de site criado 4" />
+                <img src="./CAP5.png" alt="Exemplo de site criado 5" />
+              </div>
+              <div class="hc-body">
+                <div class="stat-grid">
+                  <div class="stat"><strong>50+ Sites</strong><span>Criados e publicados</span></div>
+                  <div class="stat"><strong>98%</strong><span>Satisfação dos clientes</span></div>
+                  <div class="stat"><strong>24/7</strong><span>Suporte humanizado</span></div>
+                  <div class="stat"><strong>~7 dias</strong><span>Prazo médio de entrega</span></div>
+                </div>
+              </div>
+              <div class="hc-foot">Site de captação, sistema de agendamento ou o combo completo.</div>
+            </div>
+          </aside>
         </div>
-    </footer>
+      </div>
+
+      <!-- ═══ VIDEO ═══ -->
+      <div class="container vid-section rv">
+        <div class="vid-thumb" onclick="openVideoModal()">
+          <div class="vid-overlay">
+            <div class="play-c"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div>
+          </div>
+        </div>
+        <p class="vid-cap">Veja como nossos sites ajudam negócios a crescer</p>
+      </div>
+
+      <!-- ═══ SOCIAL PROOF ═══ -->
+      <div class="proof">
+        <div class="container">
+          <div class="proof-grid">
+            <div class="proof-item rv"><span class="proof-num" data-count="50" data-suffix="+">0</span><span class="proof-lbl">Sites publicados</span></div>
+            <div class="proof-item rv rv-d1"><span class="proof-num" data-count="98" data-suffix="%">0</span><span class="proof-lbl">Clientes satisfeitos</span></div>
+            <div class="proof-item rv rv-d2"><span class="proof-num" data-count="7" data-suffix=" dias">0</span><span class="proof-lbl">Prazo médio de entrega</span></div>
+            <div class="proof-item rv rv-d3"><span class="proof-num" data-count="24" data-suffix="/7">0</span><span class="proof-lbl">Suporte disponível</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ BENEFÍCIOS ═══ -->
+      <div class="container">
+        <section id="beneficios">
+          <div class="s-label rv">Benefícios</div>
+          <h2 class="s-title rv">Tudo que você precisa para captar clientes</h2>
+          <p class="s-sub rv">Design profissional, velocidade de implementação e suporte real. Pensado para quem quer vender mais.</p>
+
+          <div class="grid-3">
+            <div class="card rv">
+              <div class="c-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
+              <h3>Design profissional</h3>
+              <p>Layout responsivo com padrões internacionais de design e UX. Funciona em qualquer dispositivo.</p>
+            </div>
+            <div class="card rv rv-d1">
+              <div class="c-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+              <h3>WhatsApp integrado</h3>
+              <p>Seus clientes falam direto com você pelo WhatsApp com um único clique. Sem formulários complicados.</p>
+            </div>
+            <div class="card rv rv-d2">
+              <div class="c-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+              <h3>Entrega rápida</h3>
+              <p>Seu site fica pronto em dias, não em meses. Comece a captar clientes sem esperar.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="glow-sep" aria-hidden="true"></div>
+
+      <!-- ═══ PLANOS ═══ -->
+      <section class="pricing-s" id="planos">
+        <div class="container">
+          <div class="s-label rv">Planos</div>
+          <h2 class="s-title rv">Escolha o plano ideal</h2>
+          <p class="s-sub rv">Preços justos, sem surpresas. Comece com o essencial e escale quando precisar.</p>
+
+          <div class="pricing">
+            <div class="plan rv">
+              <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Essencial</div>
+              <div class="price"><strong>R$ 119,99</strong></div>
+              <div class="price-mo">+ R$ 29,99/mês (manutenção)</div>
+              <p class="plan-desc">Ideal para ter presença online profissional rapidamente.</p>
+              <ul class="plan-feat">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Design responsivo profissional</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Botão WhatsApp integrado</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Links para redes sociais</li>
+              </ul>
+              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Essencial (R$ 119,99) - Sites de captação de cliente. Gostaria de saber mais detalhes!')"><span class="btn-text" data-text="Começar agora">Começar agora</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+            </div>
+
+            <div class="plan feat rv rv-d1">
+              <div class="plan-badge">MAIS PROCURADO</div>
+              <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Profissional</div>
+              <div class="price"><strong>R$ 199,99</strong></div>
+              <div class="price-mo">+ R$ 49,99/mês (manutenção)</div>
+              <p class="plan-desc">Para quem quer transmitir autoridade e atrair mais clientes.</p>
+              <ul class="plan-feat">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Tudo do plano Essencial</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Domínio personalizado incluído</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Galeria organizada de fotos</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Mapa de localização Google</li>
+              </ul>
+              <button class="btn btn-primary" onclick="openWhatsApp('Olá! Tenho interesse no Plano Profissional (R$ 199,99) - Sites de captação de cliente. Gostaria de conhecer os detalhes!')"><span class="btn-text" data-text="Começar agora">Começar agora</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+            </div>
+
+            <div class="plan rv rv-d2">
+              <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Premium + Sistema</div>
+              <div class="price"><strong>R$ 499,99</strong></div>
+              <div class="price-mo">+ R$ 99,99/mês (manutenção)</div>
+              <p class="plan-desc">Automatize seu atendimento com site + sistema de agendamento.</p>
+              <ul class="plan-feat">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Tudo do plano Profissional</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Sistema de agendamento online</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Cadastro automático de clientes</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Manutenção grátis no primeiro mês</li>
+              </ul>
+              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Premium + Sistema (R$ 499,99) - Sites de captação com agendamento. Quero saber mais!')"><span class="btn-text" data-text="Começar agora">Começar agora</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="glow-sep" aria-hidden="true"></div>
+
+      <!-- ═══ COMO FUNCIONA ═══ -->
+      <div class="container">
+        <section id="como-funciona">
+          <div class="s-label rv">Processo</div>
+          <h2 class="s-title rv">Como funciona</h2>
+          <p class="s-sub rv">Um processo simples em 4 etapas. Você aprova cada fase e tem clareza total do que será entregue.</p>
+
+          <div class="steps">
+            <div class="steps-line" aria-hidden="true"></div>
+            <div class="step rv"><div class="step-num">1</div><h3>Briefing</h3><p>Você descreve seu negócio, serviços e como quer captar clientes.</p></div>
+            <div class="step rv rv-d1"><div class="step-num">2</div><h3>Proposta</h3><p>Definimos escopo, prazo e próximos passos para site e/ou sistema.</p></div>
+            <div class="step rv rv-d2"><div class="step-num">3</div><h3>Implementação</h3><p>Desenvolvimento com ajustes conforme sua aprovação em cada etapa.</p></div>
+            <div class="step rv rv-d3"><div class="step-num">4</div><h3>Publicação</h3><p>Entrega final e suporte para iniciar a captação de clientes.</p></div>
+          </div>
+        </section>
+
+        <!-- ═══ FAQ ═══ -->
+        <section id="faq">
+          <div class="s-label rv">Dúvidas</div>
+          <h2 class="s-title rv">Perguntas frequentes</h2>
+          <p class="s-sub rv">Se tiver alguma dúvida além destas, fale conosco pelo formulário ou WhatsApp.</p>
+
+          <div class="faq">
+            <details class="rv"><summary>Quanto tempo leva para o site ficar pronto? <span class="faq-t">+</span></summary><p>Dependendo do plano, de 3 a 10 dias úteis após o briefing aprovado.</p></details>
+            <details class="rv rv-d1"><summary>O sistema de agendamento funciona para diferentes serviços? <span class="faq-t">+</span></summary><p>Sim, o fluxo pode ser ajustado conforme regras de horários, atendimento e necessidades da sua operação — barbearias, salões, studios, clínicas e mais.</p></details>
+            <details class="rv"><summary>Vocês cuidam da publicação e configuração inicial? <span class="faq-t">+</span></summary><p>Sim. O objetivo é que você inicie o atendimento com tudo funcionando.</p></details>
+            <details class="rv rv-d1"><summary>Posso contratar apenas o site sem o sistema? <span class="faq-t">+</span></summary><p>Sim. Os planos Essencial e Profissional são focados no site. O sistema é incluso no Premium.</p></details>
+            <details class="rv"><summary>Existe suporte após a implantação? <span class="faq-t">+</span></summary><p>Sim, com orientação para o começo e apoio em necessidades do dia a dia.</p></details>
+            <details class="rv rv-d1"><summary>Quais informações preciso enviar para começar? <span class="faq-t">+</span></summary><p>Seu negócio, serviços, disponibilidade desejada e referências do que você gosta (texto e layout, se tiver).</p></details>
+          </div>
+        </section>
+      </div>
+
+      <!-- ═══ CTA ═══ -->
+      <section class="cta-s" id="orcamento">
+        <div class="container">
+          <div class="cta-box rv">
+            <div>
+              <h2>Pronto para transformar seu negócio?</h2>
+              <p class="cta-lead">Junte-se aos 50+ empreendedores que já cresceram com APX SITES. Envie seu contato e conte o que você precisa.</p>
+            </div>
+            <form class="form" action="#" method="post" aria-label="Formulário de orçamento">
+              <div><label for="nome">Seu nome</label><input id="nome" name="nome" type="text" placeholder="Ex.: Maria" required /></div>
+              <div><label for="contato">WhatsApp ou e-mail</label><input id="contato" name="contato" type="text" placeholder="(21) 99999-9999" required /></div>
+              <div><label for="mensagem">O que você quer criar?</label><textarea id="mensagem" name="mensagem" placeholder="Ex.: Quero um site para minha barbearia com agendamento online." required></textarea></div>
+              <div class="form-act">
+                <button class="btn btn-primary" type="submit"><span class="btn-text" data-text="Enviar pedido">Enviar pedido</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+                <button class="btn" type="button" onclick="openWhatsApp('Olá! Gostaria de agendar uma consulta grátis sobre os sites de captação e Sistemas.')"><span class="btn-text" data-text="Falar no WhatsApp">Falar no WhatsApp</span></button>
+              </div>
+              <p class="form-hint">Ou fale direto pelo WhatsApp: (21) 97983-4983</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container footer-inner">
+          <div>&copy; <span id="year"></span> APX SITES. Todos os direitos reservados.</div>
+          <div class="sm-links">
+            <a href="#topo">Topo</a>
+            <a href="#planos">Planos</a>
+            <a href="#faq">FAQ</a>
+            <a href="javascript:void(0)" onclick="openInstagram()">Instagram</a>
+          </div>
+        </div>
+      </footer>
+    </main>
 
     <!-- Video Modal -->
     <div id="videoModal" class="modal">
-        <button onclick="closeVideoModal()" class="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors z-50">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-        <div class="modal-content">
-            <div class="video-spinner"></div>
-            <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/ePYsqkgaaV4"
-                title="APX SITES Demo"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                style="width: 100%; height: 100%;">
-            </iframe>
-        </div>
+      <button class="m-close" onclick="closeVideoModal()" aria-label="Fechar"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      <div class="m-content">
+        <div class="v-spin"></div>
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ePYsqkgaaV4" title="APX SITES Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:relative;z-index:1"></iframe>
+      </div>
     </div>
 
     <script>
-        // ALTERE AQUI: Seu número do WhatsApp
-        const WHATSAPP_NUMBER = '5521979834983'; // Altere para seu número (55 + DDD + número)
-        const INSTAGRAM_URL = 'https://instagram.com/apxsites'; // Seu Instagram
+    (function(){
+      'use strict';
 
-        function openWhatsApp(message) {
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
+      var WA='5521979834983', IG='https://instagram.com/apxsites';
+
+      /* ── Helpers ── */
+      window.openWhatsApp=function(m){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank')};
+      window.openInstagram=function(){window.open(IG,'_blank')};
+
+      /* ── Video Modal ── */
+      window.openVideoModal=function(){document.getElementById('videoModal').classList.add('on');setTimeout(function(){var s=document.querySelector('.v-spin');if(s)s.style.display='none'},1200)};
+      window.closeVideoModal=function(){document.getElementById('videoModal').classList.remove('on')};
+      document.getElementById('videoModal').addEventListener('click',function(e){if(e.target===this)closeVideoModal()});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideoModal()});
+
+      /* ── Year ── */
+      document.getElementById('year').textContent=new Date().getFullYear();
+
+      /* ═══════════════════════════════════════
+         PARTICLE SYSTEM
+         ═══════════════════════════════════════ */
+      var canvas=document.getElementById('particles');
+      var ctx=canvas.getContext('2d');
+      var particles=[];
+      var mouse={x:-1000,y:-1000};
+      var dpr=window.devicePixelRatio||1;
+      var prefersReduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+      function resizeCanvas(){
+        canvas.width=window.innerWidth*dpr;
+        canvas.height=window.innerHeight*dpr;
+        canvas.style.width=window.innerWidth+'px';
+        canvas.style.height=window.innerHeight+'px';
+        ctx.scale(dpr,dpr);
+      }
+
+      function createParticles(){
+        particles=[];
+        var count=Math.min(80,Math.floor(window.innerWidth*window.innerHeight/18000));
+        for(var i=0;i<count;i++){
+          particles.push({
+            x:Math.random()*window.innerWidth,
+            y:Math.random()*window.innerHeight,
+            vx:(Math.random()-.5)*.15,
+            vy:(Math.random()-.5)*.15,
+            r:Math.random()*1.2+.3,
+            o:Math.random()*.25+.05
+          });
         }
+      }
 
-        function openInstagram() {
-            window.open(INSTAGRAM_URL, '_blank');
-        }
+      function drawParticles(){
+        ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+        for(var i=0;i<particles.length;i++){
+          var p=particles[i];
+          p.x+=p.vx;p.y+=p.vy;
+          if(p.x<0)p.x=window.innerWidth;
+          if(p.x>window.innerWidth)p.x=0;
+          if(p.y<0)p.y=window.innerHeight;
+          if(p.y>window.innerHeight)p.y=0;
 
-        function openVideoModal() {
-            document.getElementById('videoModal').classList.add('active');
-            // Remove o spinner após 1 segundo (tempo de carregamento)
-            setTimeout(() => {
-                const spinner = document.querySelector('.video-spinner');
-                if (spinner) {
-                    spinner.style.display = 'none';
-                }
-            }, 1000);
-        }
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle='rgba(255,255,255,'+p.o+')';
+          ctx.fill();
 
-        function closeVideoModal() {
-            document.getElementById('videoModal').classList.remove('active');
-        }
-
-        // Fechar modal ao clicar fora
-        document.getElementById('videoModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeVideoModal();
+          // Connect nearby particles
+          for(var j=i+1;j<particles.length;j++){
+            var p2=particles[j];
+            var dx=p.x-p2.x,dy=p.y-p2.y;
+            var dist=Math.sqrt(dx*dx+dy*dy);
+            if(dist<120){
+              ctx.beginPath();
+              ctx.moveTo(p.x,p.y);
+              ctx.lineTo(p2.x,p2.y);
+              ctx.strokeStyle='rgba(255,255,255,'+((.04)*(1-dist/120))+')';
+              ctx.lineWidth=.5;
+              ctx.stroke();
             }
+          }
+
+          // Mouse repulsion
+          var mdx=p.x-mouse.x,mdy=p.y-mouse.y;
+          var mDist=Math.sqrt(mdx*mdx+mdy*mdy);
+          if(mDist<150){
+            var force=(1-mDist/150)*.8;
+            p.x+=mdx/mDist*force;
+            p.y+=mdy/mDist*force;
+          }
+        }
+        if(!prefersReduced)requestAnimationFrame(drawParticles);
+      }
+
+      if(!prefersReduced){
+        resizeCanvas();createParticles();drawParticles();
+        window.addEventListener('resize',function(){resizeCanvas();createParticles()});
+        document.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY},{passive:true});
+      }
+
+      /* ═══════════════════════════════════════
+         CURSOR GLOW (smooth follow)
+         ═══════════════════════════════════════ */
+      var glow=document.getElementById('cursorGlow');
+      var gx=0,gy=0,cx=0,cy=0;
+      var isFine=window.matchMedia('(pointer:fine)').matches;
+
+      document.addEventListener('mousemove',function(e){gx=e.clientX;gy=e.clientY},{passive:true});
+
+      function animGlow(){
+        cx+=(gx-cx)*.06;cy+=(gy-cy)*.06;
+        glow.style.left=cx+'px';glow.style.top=cy+'px';
+        requestAnimationFrame(animGlow);
+      }
+      if(isFine&&!prefersReduced)animGlow();
+
+      /* ═══════════════════════════════════════
+         SCROLL REVEAL
+         ═══════════════════════════════════════ */
+      var rvObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');rvObs.unobserve(e.target)}});
+      },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+      document.querySelectorAll('.rv').forEach(function(el){rvObs.observe(el)});
+
+      /* ═══════════════════════════════════════
+         HERO TITLE — SPLIT WORD REVEAL
+         ═══════════════════════════════════════ */
+      var h1=document.getElementById('heroTitle');
+      if(h1){
+        var html=h1.innerHTML;
+        // Wrap each word in a span with staggered delay
+        var wordIndex=0;
+        var newHtml=html.replace(/(<[^>]+>)|(\S+)/g,function(match,tag,word){
+          if(tag)return tag;
+          var delay=wordIndex*0.07;
+          wordIndex++;
+          return '<span class="word" style="transition-delay:'+delay+'s">'+word+'</span>';
         });
+        h1.innerHTML=newHtml;
+
+        var h1Obs=new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){h1.classList.add('words-visible');h1Obs.unobserve(h1)}
+          });
+        },{threshold:.3});
+        h1Obs.observe(h1);
+      }
+
+      /* ═══════════════════════════════════════
+         NAV SCROLL
+         ═══════════════════════════════════════ */
+      var nav=document.getElementById('mainNav');
+      window.addEventListener('scroll',function(){
+        nav.classList.toggle('scrolled',window.scrollY>50);
+      },{passive:true});
+
+      /* ═══════════════════════════════════════
+         HERO CARD — 3D TILT
+         ═══════════════════════════════════════ */
+      var hCard=document.getElementById('heroCard');
+      if(hCard&&isFine&&!prefersReduced){
+        var wrap=hCard.parentElement;
+        wrap.addEventListener('mousemove',function(e){
+          var rect=wrap.getBoundingClientRect();
+          var x=(e.clientX-rect.left)/rect.width-.5;
+          var y=(e.clientY-rect.top)/rect.height-.5;
+          hCard.style.transform='rotateY('+x*8+'deg) rotateX('+(-y*8)+'deg) scale(1.01)';
+          hCard.style.setProperty('--shine-x',(e.clientX-rect.left)+'px');
+          hCard.style.setProperty('--shine-y',(e.clientY-rect.top)+'px');
+        });
+        wrap.addEventListener('mouseleave',function(){
+          hCard.style.transform='rotateY(0) rotateX(0) scale(1)';
+        });
+      }
+
+      /* ═══════════════════════════════════════
+         CARD SPOTLIGHT TRACKING
+         ═══════════════════════════════════════ */
+      document.querySelectorAll('.card').forEach(function(c){
+        c.addEventListener('mousemove',function(e){
+          var r=c.getBoundingClientRect();
+          c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+          c.style.setProperty('--my',(e.clientY-r.top)+'px');
+        });
+      });
+
+      /* ═══════════════════════════════════════
+         COUNTER ANIMATION
+         ═══════════════════════════════════════ */
+      var cObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting)return;
+          var el=e.target;
+          var target=parseInt(el.getAttribute('data-count'));
+          var suffix=el.getAttribute('data-suffix')||'';
+          var dur=1800,startTime=null;
+
+          function ease(t){return t===1?1:1-Math.pow(2,-10*t)}
+          function step(ts){
+            if(!startTime)startTime=ts;
+            var p=Math.min((ts-startTime)/dur,1);
+            el.textContent=Math.floor(ease(p)*target)+suffix;
+            if(p<1)requestAnimationFrame(step);else el.textContent=target+suffix;
+          }
+          requestAnimationFrame(step);
+          cObs.unobserve(el);
+        });
+      },{threshold:.5});
+      document.querySelectorAll('[data-count]').forEach(function(el){cObs.observe(el)});
+
+      /* ═══════════════════════════════════════
+         TEXT SCRAMBLE on button hover
+         ═══════════════════════════════════════ */
+      var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
+
+      function scramble(el){
+        var original=el.getAttribute('data-text');
+        if(!original)return;
+        var length=original.length;
+        var iteration=0;
+
+        clearInterval(el._scrambleInterval);
+        el._scrambleInterval=setInterval(function(){
+          el.textContent=original.split('').map(function(char,i){
+            if(i<iteration)return original[i];
+            return chars[Math.floor(Math.random()*chars.length)];
+          }).join('');
+          if(iteration>=length)clearInterval(el._scrambleInterval);
+          iteration+=1/2;
+        },25);
+      }
+
+      function unscramble(el){
+        var original=el.getAttribute('data-text');
+        if(!original)return;
+        clearInterval(el._scrambleInterval);
+        el.textContent=original;
+      }
+
+      document.querySelectorAll('.btn').forEach(function(btn){
+        var textEl=btn.querySelector('.btn-text');
+        if(!textEl)return;
+        btn.addEventListener('mouseenter',function(){scramble(textEl)});
+        btn.addEventListener('mouseleave',function(){unscramble(textEl)});
+      });
+
+      /* ═══════════════════════════════════════
+         SMOOTH ANCHOR SCROLL (offset for fixed nav)
+         ═══════════════════════════════════════ */
+      document.querySelectorAll('a[href^="#"]').forEach(function(a){
+        a.addEventListener('click',function(e){
+          var href=this.getAttribute('href');
+          if(href==='#')return;
+          var target=document.querySelector(href);
+          if(target){
+            e.preventDefault();
+            window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-20,behavior:'smooth'});
+          }
+        });
+      });
+
+    })();
     </script>
-</body>
+  </body>
 </html>
