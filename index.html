@@ -407,6 +407,47 @@
       .card>p{color:var(--muted);font-size:.9rem;line-height:1.6}
 
       /* ═══════════════════════════════════════
+         PORTFOLIO
+         ═══════════════════════════════════════ */
+      .portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+      .pf-card{
+        border-radius:var(--radius);background:var(--surface);
+        border:1px solid var(--border);overflow:hidden;
+        transition:all .4s var(--expo);position:relative;
+      }
+      .pf-card:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 24px 64px rgba(0,0,0,.5)}
+      .pf-card::before{
+        content:"";position:absolute;inset:0;
+        background:radial-gradient(500px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.05),transparent 40%);
+        pointer-events:none;opacity:0;transition:opacity .4s;z-index:2;
+      }
+      .pf-card:hover::before{opacity:1}
+      .pf-img{
+        width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;
+        background:rgba(0,0,0,.4);
+      }
+      .pf-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--expo)}
+      .pf-card:hover .pf-img img{transform:scale(1.03)}
+      .pf-tag{
+        position:absolute;top:.75rem;left:.75rem;
+        padding:.3rem .75rem;border-radius:999px;
+        background:rgba(0,0,0,.6);backdrop-filter:blur(12px);
+        -webkit-backdrop-filter:blur(12px);
+        border:1px solid rgba(255,255,255,.1);
+        font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+        color:var(--text);z-index:3;
+      }
+      .pf-body{padding:1.2rem 1.4rem}
+      .pf-body h3{font-size:1.05rem;font-weight:700;margin-bottom:.35rem;letter-spacing:-.2px}
+      .pf-body p{color:var(--muted);font-size:.86rem;line-height:1.6;margin-bottom:.8rem}
+      .pf-techs{display:flex;flex-wrap:wrap;gap:.4rem}
+      .pf-tech{
+        padding:.25rem .6rem;border-radius:999px;
+        background:var(--surface-2);border:1px solid var(--border);
+        font-size:.72rem;font-weight:650;color:var(--dim);
+      }
+
+      /* ═══════════════════════════════════════
          PRICING — with BORDER BEAM on featured
          ═══════════════════════════════════════ */
       .pricing-s{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.008)}
@@ -637,7 +678,7 @@
       @media(max-width:980px){
         .hero{min-height:auto;padding:7rem 0 3rem}
         .hero-grid{grid-template-columns:1fr;gap:2.5rem}
-        .grid-3,.pricing{grid-template-columns:1fr}
+        .grid-3,.pricing,.portfolio-grid{grid-template-columns:1fr}
         .steps{grid-template-columns:repeat(2,1fr)}
         .steps-line{display:none}
         .faq{grid-template-columns:1fr}
@@ -821,6 +862,63 @@
 
       <div class="glow-sep" aria-hidden="true"></div>
 
+      <!-- ═══ PORTFÓLIO ═══ -->
+      <div class="container">
+        <section id="portfolio">
+          <div class="s-label rv">Portfólio</div>
+          <h2 class="s-title rv">Projetos que já entregamos</h2>
+          <p class="s-sub rv">Cada projeto é único. Veja alguns dos trabalhos que já transformaram negócios reais.</p>
+
+          <div class="portfolio-grid">
+
+            <!-- ====================================================== -->
+            <!-- CASE 1: Espaço Zen (já feito - troque o print)         -->
+            <!-- Para adicionar: coloque o print na pasta e troque      -->
+            <!-- o src="PRINT-CASE-1.png" pelo nome do arquivo          -->
+            <!-- ====================================================== -->
+            <div class="pf-card rv">
+              <div class="pf-img">
+                <img src="PRINT-CASE-1.png" alt="Espaço Zen">
+                <div class="pf-tag">Dashboard</div>
+              </div>
+              <div class="pf-body">
+                <h3>Espaço Zen — Reabilitação e Saúde</h3>
+                <p>Landing page completa + painel administrativo com controle de clientes, pagamentos integrados e emails automáticos.</p>
+                <div class="pf-techs">
+                  <span class="pf-tech">Landing Page</span>
+                  <span class="pf-tech">Dashboard</span>
+                  <span class="pf-tech">Pagamentos</span>
+                  <span class="pf-tech">Automações</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ====================================================== -->
+            <!-- CASE 2: Adicione seu próximo projeto aqui              -->
+            <!-- Troque src="PRINT-CASE-2.png" pelo nome do arquivo     -->
+            <!-- ====================================================== -->
+            <div class="pf-card rv rv-d1">
+              <div class="pf-img">
+                <img src="PRINT-CASE-2.png" alt="Projeto 2">
+                <div class="pf-tag">Em breve</div>
+              </div>
+              <div class="pf-body">
+                <h3>Seu negócio pode ser o próximo</h3>
+                <p>Estamos com vagas abertas para novos projetos. Entre em contato e descubra o que podemos fazer pelo seu negócio.</p>
+                <div class="pf-techs">
+                  <span class="pf-tech">Site</span>
+                  <span class="pf-tech">Sistema</span>
+                  <span class="pf-tech">Captação</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <div class="glow-sep" aria-hidden="true"></div>
+
       <!-- ═══ PLANOS ═══ -->
       <section class="pricing-s" id="planos">
         <div class="container">
@@ -830,37 +928,26 @@
 
           <div class="pricing">
             <div class="plan rv">
-              <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Essencial</div>
-              <div class="price"><strong>R$ 119,99</strong></div>
-              <div class="price-mo">+ R$ 29,99/mês (manutenção)</div>
-              <p class="plan-desc">Pra quem precisa sair do zero e já começar a captar.</p>
+              <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Profissional</div>
+              <div class="price"><strong>R$ 497</strong></div>
+              <div class="price-mo">+ R$ 49,90/mês (manutenção)</div>
+              <p class="plan-desc">Presença online completa para captar clientes todos os dias.</p>
               <ul class="plan-feat">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Design responsivo profissional</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Botão WhatsApp integrado</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Links para redes sociais</li>
-              </ul>
-              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Essencial (R$ 119,99) - Sites de captação de cliente. Gostaria de saber mais detalhes!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
-            </div>
-
-            <div class="plan feat rv rv-d1">
-              <div class="plan-badge">MAIS PROCURADO</div>
-              <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Profissional</div>
-              <div class="price"><strong>R$ 199,99</strong></div>
-              <div class="price-mo">+ R$ 49,99/mês (manutenção)</div>
-              <p class="plan-desc">Seus clientes vão confiar antes mesmo de te conhecer.</p>
-              <ul class="plan-feat">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Tudo do plano Essencial</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Domínio personalizado incluído</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Galeria organizada de fotos</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Mapa de localização Google</li>
               </ul>
-              <button class="btn btn-primary" onclick="openWhatsApp('Olá! Tenho interesse no Plano Profissional (R$ 199,99) - Sites de captação de cliente. Gostaria de conhecer os detalhes!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Profissional (R$ 497) - Site completo de captação de clientes. Gostaria de saber mais!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
             </div>
 
-            <div class="plan rv rv-d2">
+            <div class="plan feat rv rv-d1">
+              <div class="plan-badge">MAIS PROCURADO</div>
               <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Premium + Sistema</div>
-              <div class="price"><strong>R$ 499,99</strong></div>
-              <div class="price-mo">+ R$ 149,99/mês (manutenção)</div>
+              <div class="price"><strong>R$ 1.497</strong></div>
+              <div class="price-mo">+ R$ 99,90/mês (manutenção)</div>
               <p class="plan-desc">Seu negócio funcionando no automático, 24 horas por dia.</p>
               <ul class="plan-feat">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Tudo do plano Profissional</li>
@@ -868,7 +955,22 @@
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Cadastro automático de clientes</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Manutenção grátis no primeiro mês</li>
               </ul>
-              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Premium + Sistema (R$ 499,99) - Sites de captação com agendamento. Quero saber mais!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+              <button class="btn btn-primary" onclick="openWhatsApp('Olá! Tenho interesse no Plano Premium + Sistema (R$ 1.497) - Site com sistema de agendamento. Quero saber mais!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+            </div>
+
+            <div class="plan rv rv-d2">
+              <div class="plan-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>Dashboard</div>
+              <div class="price"><strong>R$ 3.497</strong></div>
+              <div class="price-mo">+ R$ 199,90/mês (manutenção)</div>
+              <p class="plan-desc">Painel administrativo completo para controlar todo o seu negócio.</p>
+              <ul class="plan-feat">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Tudo do plano Premium</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Painel admin com login e permissões</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Controle de pagamentos e relatórios</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Integrações sob medida (pagamentos, e-mail)</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Manutenção grátis no primeiro mês</li>
+              </ul>
+              <button class="btn" onclick="openWhatsApp('Olá! Tenho interesse no Plano Dashboard (R$ 3.497) - Site + painel administrativo completo. Quero saber mais!')"><span class="btn-text" data-text="Garantir minha vaga">Garantir minha vaga</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
             </div>
           </div>
         </div>
@@ -902,7 +1004,7 @@
             <details class="rv"><summary>Quanto tempo leva para o site ficar pronto? <span class="faq-t">+</span></summary><p>Em até 48 horas após o briefing aprovado, seu site está no ar.</p></details>
             <details class="rv rv-d1"><summary>O sistema de agendamento funciona para diferentes serviços? <span class="faq-t">+</span></summary><p>Sim, o fluxo pode ser ajustado conforme regras de horários, atendimento e necessidades da sua operação — barbearias, salões, studios, clínicas e mais.</p></details>
             <details class="rv"><summary>Vocês cuidam da publicação e configuração inicial? <span class="faq-t">+</span></summary><p>Sim. O objetivo é que você inicie o atendimento com tudo funcionando.</p></details>
-            <details class="rv rv-d1"><summary>Posso contratar apenas o site sem o sistema? <span class="faq-t">+</span></summary><p>Sim. Os planos Essencial e Profissional são focados no site. O sistema é incluso no Premium.</p></details>
+            <details class="rv rv-d1"><summary>Posso contratar apenas o site sem o sistema? <span class="faq-t">+</span></summary><p>Sim. O plano Profissional é focado no site. O sistema de agendamento é incluso no Premium e o painel completo no Dashboard.</p></details>
             <details class="rv"><summary>Existe suporte após a implantação? <span class="faq-t">+</span></summary><p>Sim, com orientação para o começo e apoio em necessidades do dia a dia.</p></details>
             <details class="rv rv-d1"><summary>Quais informações preciso enviar para começar? <span class="faq-t">+</span></summary><p>Seu negócio, serviços, disponibilidade desejada e referências do que você gosta (texto e layout, se tiver).</p></details>
           </div>
