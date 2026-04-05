@@ -30,7 +30,7 @@
       }
 
       *{box-sizing:border-box;margin:0;padding:0}
-      html{scroll-behavior:smooth}
+      html{scroll-behavior:smooth;background:var(--bg)}
 
       body{
         font-family:var(--font);
@@ -55,8 +55,12 @@
         min-width:100%;min-height:100%;
         transform:translate(-50%,-50%);
         object-fit:cover;
-        z-index:-1;pointer-events:none;
-        opacity:0.35;
+        z-index:-2;pointer-events:none;
+        opacity:0.45;
+      }
+      #bgOverlay{
+        position:fixed;inset:0;z-index:-1;pointer-events:none;
+        background:rgba(0,0,0,0.82);
       }
 
       /* ═══════════════════════════════════════
@@ -731,6 +735,7 @@
     <video id="bgVideo" autoplay muted loop playsinline aria-hidden="true">
       <source src="./fundo3.mp4" type="video/mp4">
     </video>
+    <div id="bgOverlay" aria-hidden="true"></div>
 
     <!-- Particle Canvas -->
     <canvas id="particles" aria-hidden="true"></canvas>
