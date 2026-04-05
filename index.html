@@ -44,6 +44,18 @@
       .container{width:min(var(--max),calc(100% - 2.5rem));margin:0 auto}
 
       /* ═══════════════════════════════════════
+         VIDEO BACKGROUND
+         ═══════════════════════════════════════ */
+      #bgVideo{
+        position:fixed;top:50%;left:50%;width:100%;height:100%;
+        min-width:100%;min-height:100%;
+        transform:translate(-50%,-50%);
+        object-fit:cover;
+        z-index:-1;pointer-events:none;
+        opacity:0.35;
+      }
+
+      /* ═══════════════════════════════════════
          PARTICLE CANVAS
          ═══════════════════════════════════════ */
       #particles{
@@ -703,12 +715,18 @@
           transition-duration:.01ms!important;scroll-behavior:auto!important;
         }
         #particles,.cursor-glow{display:none}
+        #bgVideo{display:none}
         .rv{opacity:1;transform:none}
         .word{opacity:1;transform:none}
       }
     </style>
   </head>
   <body>
+    <!-- Video Background -->
+    <video id="bgVideo" autoplay muted loop playsinline aria-hidden="true">
+      <source src="./fundo3.mp4" type="video/mp4">
+    </video>
+
     <!-- Particle Canvas -->
     <canvas id="particles" aria-hidden="true"></canvas>
 
