@@ -55,6 +55,14 @@
       /* ═══════════════════════════════════════
          VIDEO BACKGROUND
          ═══════════════════════════════════════ */
+      #bgVideo{
+        position:fixed;top:50%;left:50%;width:100%;height:100%;
+        min-width:100%;min-height:100%;
+        transform:translate(-50%,-50%);
+        object-fit:cover;
+        z-index:-2;pointer-events:none;
+        opacity:0.45;
+      }
       #bgOverlay{
         position:fixed;inset:0;z-index:-1;pointer-events:none;
         background:rgba(0,0,0,0.82);
@@ -318,22 +326,33 @@
       }
 
       /* ═══════════════════════════════════════
-         SCROLL-SCRUB BACKGROUND VIDEO
+         VIDEO SCROLL-SCRUB SECTION
          ═══════════════════════════════════════ */
-      #scrubVideo{
-        position:fixed;top:50%;left:50%;
-        min-width:100%;min-height:100%;
-        width:auto;height:auto;
-        transform:translate(-50%,-50%);
-        object-fit:cover;
-        z-index:-2;pointer-events:none;
-        opacity:0.5;
+      .vid-scroll-section{
+        position:relative;z-index:2;
+        height:300vh;
       }
-      .scrub-progress-bar{
-        position:fixed;bottom:0;left:0;height:2px;
-        background:rgba(255,255,255,.3);
-        width:0%;z-index:100;pointer-events:none;
-        transition:width .1s linear;
+      .vid-scroll-sticky{
+        position:sticky;top:0;
+        height:100vh;
+        display:flex;align-items:center;justify-content:center;
+        overflow:hidden;
+      }
+      .vid-scroll-wrap{
+        position:relative;width:min(90%,1100px);
+        border-radius:var(--radius);overflow:hidden;
+        border:1px solid var(--border);
+        box-shadow:0 40px 100px rgba(0,0,0,.7);
+        aspect-ratio:16/9;
+        background:#000;
+      }
+      .vid-scroll-wrap video{
+        width:100%;height:100%;object-fit:cover;display:block;
+      }
+      .vid-scroll-progress{
+        position:absolute;bottom:0;left:0;height:3px;
+        background:rgba(255,255,255,.5);
+        width:0%;transition:width .1s linear;z-index:3;
       }
 
       /* ═══════════════════════════════════════
@@ -667,19 +686,18 @@
           transition-duration:.01ms!important;scroll-behavior:auto!important;
         }
         #particles,.cursor-glow{display:none}
-        #scrubVideo{display:none}
+        #bgVideo{display:none}
         .rv{opacity:1;transform:none}
         .word{opacity:1;transform:none}
       }
     </style>
   </head>
   <body>
-    <!-- Scroll-Scrub Background Video -->
-    <video id="scrubVideo" muted playsinline preload="auto" aria-hidden="true">
-      <source src="./video2.mp4" type="video/mp4">
+    <!-- Video Background -->
+    <video id="bgVideo" autoplay muted loop playsinline aria-hidden="true">
+      <source src="./fundo3.mp4" type="video/mp4">
     </video>
     <div id="bgOverlay" aria-hidden="true"></div>
-    <div class="scrub-progress-bar" id="scrubProgress"></div>
 
     <!-- Particle Canvas -->
     <canvas id="particles" aria-hidden="true"></canvas>
@@ -777,6 +795,18 @@
               <div class="hc-foot">Site de captação, sistema de agendamento ou o combo completo.</div>
             </div>
           </aside>
+        </div>
+      </div>
+
+      <!-- ═══ VIDEO SCROLL-SCRUB ═══ -->
+      <div class="vid-scroll-section" id="vidScrollSection">
+        <div class="vid-scroll-sticky">
+          <div class="vid-scroll-wrap">
+            <video id="scrubVideo" muted playsinline preload="auto">
+              <source src="./video2.mp4" type="video/mp4">
+            </video>
+            <div class="vid-scroll-progress" id="scrubProgress"></div>
+          </div>
         </div>
       </div>
 
@@ -1033,16 +1063,15 @@
       };
       window.openInstagram=function(){window.open(IG,'_blank')};
 
-      /* ── Video Modal ── */
-
       /* ── Year ── */
       document.getElementById('year').textContent=new Date().getFullYear();
 
-      /* ── Scroll-Scrub Background Video ── */
+      /* ── Scroll-Scrub Video Section ── */
       (function(){
         var video=document.getElementById('scrubVideo');
+        var section=document.getElementById('vidScrollSection');
         var bar=document.getElementById('scrubProgress');
-        if(!video)return;
+        if(!video||!section)return;
 
         var ready=false;
         video.addEventListener('loadedmetadata',function(){ready=true});
@@ -1053,9 +1082,10 @@
             ticking=true;
             requestAnimationFrame(function(){
               if(!ready){ticking=false;return}
-              var scrollTop=window.pageYOffset||document.documentElement.scrollTop;
-              var docHeight=document.documentElement.scrollHeight-window.innerHeight;
-              var progress=Math.min(Math.max(scrollTop/docHeight,0),1);
+              var rect=section.getBoundingClientRect();
+              var sectionH=section.offsetHeight-window.innerHeight;
+              var scrolled=-rect.top;
+              var progress=Math.min(Math.max(scrolled/sectionH,0),1);
               video.currentTime=progress*video.duration;
               if(bar)bar.style.width=(progress*100)+'%';
               ticking=false;
