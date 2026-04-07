@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.dialedweb.com)",
+      "Bash(curl -sL -o \"C:/Users/breno/OneDrive/Área de Trabalho/LANDING-APEX/fonts/SFPRODISPLAYBOLD.woff2\" \"https://www.dialedweb.com/fonts/SFPRODISPLAYBOLD.woff2\")",
+      "Bash(curl -sL -o \"C:/Users/breno/OneDrive/Área de Trabalho/LANDING-APEX/fonts/SFPRODISPLAYBOLD.woff\" \"https://www.dialedweb.com/fonts/SFPRODISPLAYBOLD.woff\")",
+      "Read(//c/Users/breno/OneDrive/Área de Trabalho//**)",
+      "WebFetch(domain:betterstack.com)"
+    ]
+  }
+}
